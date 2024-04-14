@@ -1,46 +1,64 @@
-#To deploy your Flask application using Docker, Kubernetes, and Jenkins, you need to follow several steps to set up the application and configure the deployment pipeline. Here are the detailed steps to deploy your Flask app:
+# Deployment Guide for Flask Application
 
-Step 1: Prepare Your Flask Application
-Ensure Your Flask App Is Ready: Ensure that your Flask application (app.py) and any dependencies are prepared. Make sure the application is running as expected locally.
+This guide provides detailed steps to deploy your Flask application using Docker, Kubernetes, and Jenkins.
 
-Organize Your Project Files: Ensure your project files are well-organized, including the Flask application, the requirements file, and any other supporting files such as HTML, CSS, and JavaScript files.
+## Prerequisites
 
-Step 2: Set Up a Dockerfile
-Create a Dockerfile: In the root directory of your project, create a Dockerfile to specify how your application should be containerized.
+- Docker installed on your local machine.
+- Kubernetes cluster set up and configured.
+- Jenkins installed and configured.
+- Access to your GitHub repository and Docker Hub account.
 
-Define the Base Image: Use the python:3.10-slim base image for your Dockerfile.
+## Steps to Deploy
 
-Set the Working Directory: Use the WORKDIR /app command to set the working directory inside the container.
+### Step 1: Prepare Your Flask Application
 
-Copy the requirements: Copy the requirements.txt file into the container and install dependencies using the RUN pip install --no-cache-dir -r requirements.txt command.
+1. **Ensure Your Flask App Is Ready:** Ensure that your Flask application (`app.py`) and any dependencies are prepared. Make sure the application is running as expected locally.
+   
+2. **Organize Your Project Files:** Ensure your project files are well-organized, including the Flask application, the `requirements.txt` file, and any other supporting files such as HTML, CSS, and JavaScript files.
 
-Copy the Application Code: Use the COPY . . command to copy all project files into the container.
+### Step 2: Set Up a Dockerfile
 
-Expose the Flask App Port: Use the EXPOSE 5926 command to expose the Flask app port.
+1. **Create a Dockerfile:** In the root directory of your project, create a file named `Dockerfile` to specify how your application should be containerized.
 
-Set the Entry Point: Use CMD ["python", "app.py"] as the entry point to run the Flask application when the container starts.
+2. **Define the Base Image:** Use the `python:3.10-slim` base image in your Dockerfile.
 
-Step 3: Build and Push the Docker Image
-Build the Docker Image: Use the docker build -t satvikjangra/dockertry:latest . command to build the Docker image.
+3. **Set the Working Directory:** Use the `WORKDIR /app` command to set the working directory inside the container.
 
-Push the Docker Image: Use the docker push satvikjangra/dockertry:latest command to push the image to Docker Hub.
+4. **Copy the Requirements:** Use the `COPY requirements.txt .` command to copy the `requirements.txt` file into the container and install dependencies with the `RUN pip install --no-cache-dir -r requirements.txt` command.
 
-Step 4: Set Up Kubernetes Configuration Files
-Create Deployment.yaml: In your project directory, create a Deployment.yaml file to specify the deployment configuration.
+5. **Copy the Application Code:** Use the `COPY . .` command to copy all project files into the container.
 
-Create Service.yaml: Create a Service.yaml file to specify how the application should be exposed.
+6. **Expose the Flask App Port:** Use the `EXPOSE 5926` command to expose the Flask app port.
 
-Step 5: Deploy the Application Using Kubernetes
-Apply the Deployment Configuration: Use the kubectl apply -f Deployment.yaml command to deploy the application using Kubernetes.
+7. **Set the Entry Point:** Use `CMD ["python", "app.py"]` as the entry point to run the Flask application when the container starts.
 
-Apply the Service Configuration: Use the kubectl apply -f Service.yaml command to set up the service.
+### Step 3: Build and Push the Docker Image
 
-Step 6: Set Up Jenkins Pipeline
-Create a Jenkinsfile: In the root directory of your project, create a Jenkinsfile to define your CI/CD pipeline.
+1. **Build the Docker Image:** Use the command `docker build -t satvikjangra/dockertry:latest .` to build the Docker image.
 
-Define Pipeline Stages: Specify the stages for cloning the repository, building the Docker image, pushing the image to Docker Hub, and deploying the application using Kubernetes.
+2. **Push the Docker Image:** Use the command `docker push satvikjangra/dockertry:latest` to push the image to Docker Hub.
 
-Configure Jenkins: Ensure Jenkins is set up and connected to your repository.
+### Step 4: Set Up Kubernetes Configuration Files
 
-Trigger the Pipeline: Run the Jenkins pipeline to build, push, and deploy your application.
+1. **Create `Deployment.yaml`:** In your project directory, create a file named `Deployment.yaml` to specify the deployment configuration.
 
+2. **Create `Service.yaml`:** Create a file named `Service.yaml` to specify how the application should be exposed.
+
+### Step 5: Deploy the Application Using Kubernetes
+
+1. **Apply the Deployment Configuration:** Use the command `kubectl apply -f Deployment.yaml` to deploy the application using Kubernetes.
+
+2. **Apply the Service Configuration:** Use the command `kubectl apply -f Service.yaml` to set up the service.
+
+### Step 6: Set Up Jenkins Pipeline
+
+1. **Create a Jenkinsfile:** In the root directory of your project, create a file named `Jenkinsfile` to define your CI/CD pipeline.
+
+2. **Define Pipeline Stages:** Specify the stages for cloning the repository, building the Docker image, pushing the image to Docker Hub, and deploying the application using Kubernetes.
+
+3. **Configure Jenkins:** Ensure Jenkins is set up and connected to your repository.
+
+4. **Trigger the Pipeline:** Run the Jenkins pipeline to build, push, and deploy your application.
+
+By following these steps, you can successfully deploy your Flask application using Docker, Kubernetes, and Jenkins. Adjust the configurations and files as needed for your specific deployment scenario.
