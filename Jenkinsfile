@@ -1,25 +1,33 @@
 pipeline {
     agent any
     stages {
-        stage('Clone Repository') {
+        stage('Clone') {
             steps {
-                git 'https://github.com/your-repo/your-flask-app.git'
+                git 'https://github.com/SatvikJangra/Detect-Tree-Deployment'
             }
         }
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                sh 'docker build -t your-docker-repo:your-tag .'
+                script {
+                    def imageName = 'satvikjangra/dockertry:latest'
+                    sh 'docker build -t ' + imageNew + ' .'
+                }
             }
         }
-        stage('Push Docker Image') {
+        stage('Push') {
             steps {
-                sh 'docker push your-docker-repo:your-tag'
+                script {
+                    def imageName = 'satvikjangra/dockertry:latest'
+                    sh 'docker push ' + imageNew
+                }
             }
         }
-        stage('Deploy to Kubernetes') {
+        stage('Deploy') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
+                script {
+                    sh 'kubectl apply -f Deployment.yaml'
+                    sh 'kubectl apply -f Service.yaml'
+                }
             }
         }
     }
