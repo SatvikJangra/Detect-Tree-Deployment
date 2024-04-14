@@ -13,7 +13,7 @@ This guide provides detailed steps to deploy your Flask application using Docker
 
 ### Step 1: Prepare Your Flask Application
 
-1. **Ensure Your Flask App Is Ready:** Ensure that your Flask application (`app.py`) and any dependencies are prepared. Make sure the application is running as expected locally.
+1. **Ensure Your Flask App Is Ready:** Ensure that your Flask application (`main.py`) and any dependencies are prepared. Make sure the application is running as expected locally.
    
 2. **Organize Your Project Files:** Ensure your project files are well-organized, including the Flask application, the `requirements.txt` file, and any other supporting files such as HTML, CSS, and JavaScript files.
 
